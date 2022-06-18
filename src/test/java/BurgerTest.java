@@ -1,10 +1,11 @@
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import praktikum.Bun;
 import praktikum.Burger;
 import praktikum.Ingredient;
 import praktikum.IngredientType;
+
+import java.text.DecimalFormat;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -60,18 +61,15 @@ public class BurgerTest {
 
     @Test
     public void getReceipt() {
-        Bun bun = mock(Bun.class);
+
         burger.setBuns(bun);
-        Ingredient ingredient = mock(Ingredient.class);
+        burger.addIngredient(ingredient1);
         burger.addIngredient(ingredient);
-        when(ingredient.getName()).thenReturn("Ингридиент!");
-        when(ingredient.getPrice()).thenReturn(10.0f);
-        when(ingredient.getType()).thenReturn(IngredientType.FILLING);
-        when(bun.getPrice()).thenReturn(2.0f);
-        when(bun.getName()).thenReturn("Булочка");
-        Assert.assertTrue(burger.getReceipt().contains("(==== Булочка ====)"));
-        Assert.assertTrue(burger.getReceipt().contains("= filling Ингридиент! ="));
-        Assert.assertTrue(burger.getReceipt().contains("Price: 14,000000"));
+        String formattedBurgerPrice = String.format("%.6f", burger.getPrice());
+        Assert.assertTrue(burger.getReceipt().contains("(==== " + bun.name + " ====)"));
+        Assert.assertTrue(burger.getReceipt().contains("= " + (ingredient1.getType().toString().toLowerCase()) + " " + ingredient1.getName() + " ="));
+        Assert.assertTrue(burger.getReceipt().contains("= " + (ingredient.getType().toString().toLowerCase()) + " " + ingredient.getName() + " ="));
+        Assert.assertTrue(burger.getReceipt().contains("Price: " + formattedBurgerPrice));
 
 
     }
