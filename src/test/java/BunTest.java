@@ -5,15 +5,16 @@ import static org.junit.Assert.assertEquals;
 
 
 public class BunTest {
+    private Bun bun = new Bun("delicious", 0.77f);
+
     @Test
-    public void returnBunNameTest(){
-        Bun bun =new Bun("delicious", 0.77f);
+    public void returnBunNameTest() {
+
         assertEquals("delicious", bun.getName());
     }
 
     @Test
-    public void returnBunPriceTest(){
-        Bun bun =new Bun("delicious", 0.77f);
-        assertEquals(0.77f, bun.getPrice(),0);
+    public void returnBunPriceTest() {
+        assertEquals(0.77f, bun.getPrice(), 0);
     }
 }
