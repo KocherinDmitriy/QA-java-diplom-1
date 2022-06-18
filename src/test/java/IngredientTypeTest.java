@@ -1,24 +1,40 @@
 import org.junit.Test;
-import praktikum.IngredientType;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import static junit.framework.TestCase.assertEquals;
 
+@RunWith(Parameterized.class)
 public class IngredientTypeTest {
+
+    private final Enum IngredientType;
+    private final String name;
+
+    public IngredientTypeTest(String name, Enum IngredientType) {
+        this.name = name;
+        this.IngredientType = IngredientType;
+    }
+
+
+    @Parameterized.Parameters(name = "{index} => name={0}, IngredientType={1}")
+
+    public static Object[][] getData() {
+        return new Object[][]{
+                {"SAUCE", praktikum.IngredientType.SAUCE},
+                {"FILLING", praktikum.IngredientType.FILLING},
+
+
+        };
+    }
 
 
     @Test
 
     public void returnIngredientSauceNameTest(){
-        IngredientType ingredientType=IngredientType.SAUCE;
+        praktikum.IngredientType ingredientType= (praktikum.IngredientType) IngredientType;
         String e=ingredientType.toString();
-        assertEquals(e,"SAUCE");
+        assertEquals(e,name);
 
     }
-    @Test
 
-    public void returnIngredientFillingNameTest(){
-        IngredientType ingredientType=IngredientType.FILLING;
-        String e=ingredientType.toString();
-        assertEquals(e,"FILLING");
-
-    }
 }
