@@ -12,11 +12,10 @@ public class BurgerTest {
     @Test
     public void addIngredient() {
         Burger burger=new Burger();
-        Ingredient ingredient=mock(Ingredient.class);
+        Bun bun=new Bun("Вкусная булочка",11f);
+        Ingredient ingredient=new Ingredient(IngredientType.SAUCE,"sadd",10.0f);
         burger.addIngredient(ingredient);
-        when(ingredient.getName()).thenReturn("Ингридиент!");
-        when(ingredient.getPrice()).thenReturn(10.0f);
-        when(ingredient.getType()).thenReturn(IngredientType.SAUCE);
+        burger.setBuns(bun);
         Assert.assertEquals(burger.ingredients.size(),1);
 
     }
@@ -24,16 +23,12 @@ public class BurgerTest {
     @Test
     public void removeIngredient() {
         Burger burger=new Burger();
-        Ingredient ingredient=mock(Ingredient.class);
+        Bun bun=new Bun("Вкусная булочка",11f);
+        Ingredient ingredient=new Ingredient(IngredientType.SAUCE,"sadd",10.0f);
+        Ingredient ingredient1=new Ingredient(IngredientType.FILLING,"111",11.0f);
         burger.addIngredient(ingredient);
-        when(ingredient.getName()).thenReturn("Ингридиент0");
-        when(ingredient.getPrice()).thenReturn(10.0f);
-        when(ingredient.getType()).thenReturn(IngredientType.SAUCE);
-        Ingredient ingredient1=mock(Ingredient.class);
-        burger.addIngredient(ingredient);
-        when(ingredient1.getName()).thenReturn("Ингридиент!");
-        when(ingredient1.getPrice()).thenReturn(10.0f);
-        when(ingredient1.getType()).thenReturn(IngredientType.FILLING);
+        burger.addIngredient(ingredient1);
+        burger.setBuns(bun);
         Assert.assertEquals(burger.ingredients.size(),2);
         burger.removeIngredient(1);
         Assert.assertEquals(burger.ingredients.size(),1);
