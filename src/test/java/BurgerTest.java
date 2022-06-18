@@ -56,9 +56,12 @@ public class BurgerTest {
     public void getPrice() {
         Burger burger=new Burger();
         Bun bun = mock(Bun.class);
+        Ingredient ingredient=mock(Ingredient.class);
         burger.setBuns(bun);
+        burger.addIngredient(ingredient);
         when(bun.getPrice()).thenReturn(2.0f);
-        Assert.assertEquals(burger.getPrice(), 4.0f,0);
+        when(ingredient.getPrice()).thenReturn(10.0f);
+        Assert.assertEquals(burger.getPrice(), 14.0f,0);
     }
 
     @Test
